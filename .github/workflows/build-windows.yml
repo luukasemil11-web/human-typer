@@ -1,0 +1,39 @@
+name: Build Windows app
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pynput pyinstaller
+
+      - name: Build HumanTyper.exe
+        run: pyinstaller --noconfirm --onefile --windowed --name HumanTyper --collect-submodules pynput typer.py
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: HumanTyper-windows
+          path: dist/HumanTyper.exe
+
+      - name: Publish as latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Human Typer (latest Windows build)
+          files: dist/HumanTyper.exe
+          make_latest: true
