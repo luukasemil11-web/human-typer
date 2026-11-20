@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Targets .NET Framework 4.8, which ships with every Windows 10/11 PC,
+       so the .exe needs nothing else installed and stays tiny. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>HumanTyper</AssemblyName>
+    <RootNamespace>HumanTyper</RootNamespace>
+    <Product>Human Typer</Product>
+    <Description>Types pasted text like a human.</Description>
+    <Version>2.0.0</Version>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+</Project>
