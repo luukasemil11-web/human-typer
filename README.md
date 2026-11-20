@@ -4,8 +4,8 @@ Paste text, press **Start**, click into a Google Doc (or anything else) during t
 
 ## Windows (no Python needed)
 
-1. Go to **Releases → Human Typer (latest Windows build)** and download `HumanTyper.exe`.
-2. Double-click it. Windows may say *"Windows protected your PC"* because the app isn't signed — click **More info → Run anyway**.
+1. Go to **Releases → Human Typer (latest Windows build)** and download `HumanTyper-windows.zip`.
+2. Right-click it → **Extract All**, then double-click `HumanTyper.exe` in the extracted folder. Windows may say *"Windows protected your PC"* because the app isn't signed — click **More info → Run anyway**.
 
 The Windows app is written in C# (source in [`windows/`](windows/)) against .NET Framework 4.8, which comes with every Windows 10/11 PC, so the `.exe` is tiny and needs nothing installed. GitHub Actions builds it on every push to `main`.
 

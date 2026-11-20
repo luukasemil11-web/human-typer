@@ -17,11 +17,15 @@ jobs:
       - name: Build HumanTyper.exe
         run: dotnet build windows/HumanTyper.csproj -c Release -o out
 
+      - name: Zip it
+        shell: pwsh
+        run: Compress-Archive -Path out/HumanTyper.exe -DestinationPath HumanTyper-windows.zip -CompressionLevel Optimal
+
       - name: Upload build
         uses: actions/upload-artifact@v5
         with:
           name: HumanTyper-windows
-          path: out/HumanTyper.exe
+          path: HumanTyper-windows.zip
 
       - name: Publish as latest release
         shell: bash
@@ -29,5 +33,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release view latest >/dev/null 2>&1 || \
-            gh release create latest --title "Human Typer (latest Windows build)" --notes "Download HumanTyper.exe and double-click it."
-          gh release upload latest out/HumanTyper.exe --clobber
+            gh release create latest --title "Human Typer (latest Windows build)" --notes "Download HumanTyper-windows.zip, unzip it, and double-click HumanTyper.exe."
+          gh release delete-asset latest HumanTyper.exe -y 2>/dev/null || true
+          gh release upload latest HumanTyper-windows.zip --clobber
